@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   AppBar, Toolbar, Typography, TextField, Button, 
-  Card, CardContent, Dialog, DialogTitle, DialogContent, 
-  DialogActions, Rating, Chip, Badge, IconButton, Box, Grid
+  Card, Dialog, DialogTitle, DialogContent, 
+  DialogActions, Chip, IconButton, Box, Grid
 } from '@mui/material';
 
 // MUI Icons
@@ -272,7 +272,7 @@ export default function App() {
         </Box>
 
         {filteredMovies.length === 0 ? (
-          <Typography textAlign="center" color="gray" sx={{ py: 10 }}>映画が見つかりませんでした。</Typography>
+          <Typography color="gray" sx={{ py: 10, textAlign: 'center' }}>映画が見つかりませんでした。</Typography>
         ) : (
           <>
             {/* Hero Showcase */}
@@ -331,7 +331,7 @@ export default function App() {
                 {filteredMovies.map((movie, index) => {
                   const isActive = index === currentIndex;
                   return (
-                    <Grid item xs={6} sm={4} md={3} key={movie.id}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }} key={movie.id}>
                       <Card 
                         onClick={() => setCurrentIndex(index)}
                         sx={{ 
@@ -363,7 +363,7 @@ export default function App() {
       </Box>
 
       {/* Details Modal */}
-      <Dialog open={Boolean(selectedMovie)} onClose={() => setSelectedMovie(null)} maxWidth="md" fullWidth PaperProps={{ sx: { backgroundColor: '#12121f', color: '#fff', border: '1px solid #2a2a40', borderRadius: 4 } }}>
+      <Dialog open={Boolean(selectedMovie)} onClose={() => setSelectedMovie(null)} maxWidth="md" fullWidth slotProps={{ paper: { sx: { backgroundColor: '#12121f', color: '#fff', border: '1px solid #2a2a40', borderRadius: 4 } } }}>
         {selectedMovie && (
           <>
             <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -413,14 +413,14 @@ export default function App() {
       </Dialog>
 
       {/* Add Movie Dialog */}
-      <Dialog open={openAddModal} onClose={() => setOpenAddModal(false)} maxWidth="xs" fullWidth PaperProps={{ sx: { backgroundColor: '#12121f', color: '#fff', border: '1px solid #2a2a40', borderRadius: 4 } }}>
+      <Dialog open={openAddModal} onClose={() => setOpenAddModal(false)} maxWidth="xs" fullWidth slotProps={{ paper: { sx: { backgroundColor: '#12121f', color: '#fff', border: '1px solid #2a2a40', borderRadius: 4 } } }}>
         <DialogTitle sx={{ fontWeight: 'bold' }}>新しい映画を追加</DialogTitle>
         <form onSubmit={handleAddMovie}>
           <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <TextField label="映画タイトル" fullWidth required size="small" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} InputLabelProps={{ style: { color: '#888' } }} inputProps={{ style: { color: '#fff' } }} />
-            <TextField label="ジャンル" fullWidth size="small" value={newGenre} onChange={(e) => setNewGenre(e.target.value)} InputLabelProps={{ style: { color: '#888' } }} inputProps={{ style: { color: '#fff' } }} />
-            <TextField label="ポスター画像URL" fullWidth size="small" value={newPoster} onChange={(e) => setNewPoster(e.target.value)} InputLabelProps={{ style: { color: '#888' } }} inputProps={{ style: { color: '#fff' } }} />
-            <TextField label="あらすじ" fullWidth multiline rows={3} size="small" value={newSynopsis} onChange={(e) => setNewSynopsis(e.target.value)} InputLabelProps={{ style: { color: '#888' } }} inputProps={{ style: { color: '#fff' } }} />
+            <TextField label="映画タイトル" fullWidth required size="small" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} slotProps={{ inputLabel: { style: { color: '#888' } }, htmlInput: { style: { color: '#fff' } } }} />
+            <TextField label="ジャンル" fullWidth size="small" value={newGenre} onChange={(e) => setNewGenre(e.target.value)} slotProps={{ inputLabel: { style: { color: '#888' } }, htmlInput: { style: { color: '#fff' } } }} />
+            <TextField label="ポスター画像URL" fullWidth size="small" value={newPoster} onChange={(e) => setNewPoster(e.target.value)} slotProps={{ inputLabel: { style: { color: '#888' } }, htmlInput: { style: { color: '#fff' } } }} />
+            <TextField label="あらすじ" fullWidth multiline rows={3} size="small" value={newSynopsis} onChange={(e) => setNewSynopsis(e.target.value)} slotProps={{ inputLabel: { style: { color: '#888' } }, htmlInput: { style: { color: '#fff' } } }} />
           </DialogContent>
           <DialogActions sx={{ p: 2 }}>
             <Button onClick={() => setOpenAddModal(false)} sx={{ color: '#aaa' }}>キャンセル</Button>
